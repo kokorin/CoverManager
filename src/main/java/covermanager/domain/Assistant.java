@@ -1,7 +1,11 @@
 package covermanager.domain;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+
 public class Assistant extends Person {
-    private State state;
+    private final ObjectProperty<State> state = new SimpleObjectProperty<>();
+    private final Payment payment = new Payment();
 
     public enum State {
         NOT_STARTED,
@@ -10,10 +14,18 @@ public class Assistant extends Person {
     }
 
     public State getState() {
+        return state.get();
+    }
+
+    public ObjectProperty<State> stateProperty() {
         return state;
     }
 
     public void setState(State state) {
-        this.state = state;
+        this.state.set(state);
+    }
+
+    public Payment getPayment() {
+        return payment;
     }
 }

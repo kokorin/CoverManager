@@ -5,18 +5,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
-import javax.inject.Singleton;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 
-@Singleton
+@ApplicationScoped
 public class View {
     private final BeanManager beanManager;
 
@@ -97,7 +97,7 @@ public class View {
             return this;
         }
 
-        public ControllerBuilder<T> withController(Consumer<T> consumer) {
+        public ControllerBuilder<T> beforeShow(Consumer<T> consumer) {
             consumer.accept(getController());
             return this;
         }

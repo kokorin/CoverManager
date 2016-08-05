@@ -1,5 +1,7 @@
 package covermanager;
 
+import covermanager.view.View;
+import covermanager.view.workspace.WorkspaceController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import org.jboss.weld.environment.se.Weld;
@@ -12,12 +14,17 @@ public class CoverManager extends Application {
     public void init() throws Exception {
         super.init();
         weld = new Weld();
-        WeldContainer container = weld.initialize();
+
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        WeldContainer container = weld.initialize();
+        View view = container.select(View.class).get();
 
+        view.forController(WorkspaceController.class)
+                .withTitle("CoverManager")
+                .showAndWait();
     }
 
     @Override

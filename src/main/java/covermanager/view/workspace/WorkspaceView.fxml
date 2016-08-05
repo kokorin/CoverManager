@@ -1,0 +1,18 @@
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<BorderPane xmlns:fx="http://www.w3.org/1999/xhtml" fx:controller="covermanager.view.workspace.WorkspaceController"
+            prefWidth="640" prefHeight="480">
+
+    <top>
+        <HBox>
+            <Button fx:id="addCover" text="Add"/>
+            <Button fx:id="editCover" text="Edit"/>
+            <Button fx:id="removeCover" text="Remove"/>
+        </HBox>
+    </top>
+    <center>
+        <TableView fx:id="coverTable"/>
+    </center>
+</BorderPane>

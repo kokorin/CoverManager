@@ -1,31 +1,46 @@
 package covermanager.domain;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public abstract class Person {
-    private String name;
-    private String skype;
-    private String vk;
+    private final StringProperty name = new SimpleStringProperty();
+    private final StringProperty skype = new SimpleStringProperty();
+    private final StringProperty vk = new SimpleStringProperty();
 
     public String getName() {
+        return name.get();
+    }
+
+    public StringProperty nameProperty() {
         return name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name.set(name);
     }
 
     public String getSkype() {
+        return skype.get();
+    }
+
+    public StringProperty skypeProperty() {
         return skype;
     }
 
     public void setSkype(String skype) {
-        this.skype = skype;
+        this.skype.set(skype);
     }
 
     public String getVk() {
+        return vk.get();
+    }
+
+    public StringProperty vkProperty() {
         return vk;
     }
 
     public void setVk(String vk) {
-        this.vk = vk;
+        this.vk.set(vk);
     }
 }

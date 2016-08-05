@@ -1,0 +1,21 @@
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<BorderPane xmlns:fx="http://www.w3.org/1999/xhtml" fx:controller="covermanager.view.cover.CoverController"
+            prefWidth="640" prefHeight="480">
+
+    <center>
+        <StackPane fx:id="content">
+        </StackPane>
+    </center>
+
+    <bottom>
+        <HBox>
+            <Button fx:id="saveButton" text="Save" />
+            <Button fx:id="cancelButton" text="Cancel" />
+        </HBox>
+    </bottom>
+</BorderPane>
