@@ -9,6 +9,9 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Cover {
     private final StringProperty anime = new SimpleStringProperty();
     private final StringProperty song = new SimpleStringProperty();

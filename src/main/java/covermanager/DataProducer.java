@@ -1,15 +1,15 @@
 package covermanager;
 
+import covermanager.domain.Cover;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
-import javax.inject.Singleton;
-
-@ApplicationScoped
 public class DataProducer {
-    @Produces
-    @Singleton
     public Data produceData() {
-        return new Data();
+        Data result =  new Data();
+        Cover cover = new Cover();
+        cover.setAnime("Sailor Moon");
+        cover.setSong("Gangnam Style");
+        result.getCovers().add(cover);
+
+        return result;
     }
 }

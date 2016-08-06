@@ -4,25 +4,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.picocontainer.PicoContainer;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.spi.CreationalContext;
-import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.inject.Inject;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
-import java.util.Set;
 import java.util.function.Consumer;
 
-@ApplicationScoped
 public class View {
-    private final BeanManager beanManager;
+    private final PicoContainer container;
 
-    @Inject
-    public View(BeanManager beanManager) {
-        this.beanManager = beanManager;
+    public View(PicoContainer container) {
+        this.container = container;
     }
 
     public <T> ControllerBuilder<T> forController(Class<T> controllerClass) {
@@ -52,19 +45,8 @@ public class View {
                         throw new RuntimeException("Expecting controller " + controllerClass + " but FXML specifies " + clazz);
                     }
 
-                    Set<Bean<?>> beans = beanManager.getBeans(controllerClass);
-
-                    if (beans.size() > 1) {
-                        throw new RuntimeException("Ambiguous bean type: " + controllerClass);
-                    }
-                    if (beans.isEmpty()) {
-                        throw new RuntimeException("No bean found: " + controllerClass);
-                    }
-
-                    Bean<?> bean = beans.iterator().next();
-                    CreationalContext<?> creationalContext = beanManager.createCreationalContext(bean);
                     @SuppressWarnings("unchecked")
-                    T controller = (T)beanManager.getReference(bean, controllerClass, creationalContext);
+                    T controller = container.getComponent(controllerClass);
 
                     return controller;
                 });

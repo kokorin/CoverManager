@@ -1,15 +1,17 @@
-<?import javafx.scene.control.Accordion?>
-<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
 <BorderPane xmlns:fx="http://www.w3.org/1999/xhtml" fx:controller="covermanager.view.cover.CoverController"
-            prefWidth="640" prefHeight="480">
+            fx:id="root" prefWidth="640" prefHeight="480">
 
     <center>
-        <StackPane fx:id="content">
-        </StackPane>
+        <VBox>
+            <Label text="Anime"/>
+            <TextField fx:id="animeInput"/>
+            <Label text="Song"/>
+            <TextField fx:id="songInput"/>
+        </VBox>
     </center>
 
     <bottom>

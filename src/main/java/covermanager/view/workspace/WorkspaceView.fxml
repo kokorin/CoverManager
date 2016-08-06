@@ -2,6 +2,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TableColumn?>
 <BorderPane xmlns:fx="http://www.w3.org/1999/xhtml" fx:controller="covermanager.view.workspace.WorkspaceController"
             prefWidth="640" prefHeight="480">
 
@@ -13,6 +14,14 @@
         </HBox>
     </top>
     <center>
-        <TableView fx:id="coverTable"/>
+        <TableView fx:id="coverTable">
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+            </columnResizePolicy>
+            <columns>
+                <TableColumn fx:id="animeColumn" text="Anime" prefWidth="150"/>
+                <TableColumn fx:id="songColumn" text="Song" prefWidth="200"/>
+            </columns>
+        </TableView>
     </center>
 </BorderPane>
