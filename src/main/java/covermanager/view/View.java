@@ -3,7 +3,9 @@ package covermanager.view;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import org.picocontainer.PicoContainer;
 
 import java.io.IOException;
@@ -28,6 +30,7 @@ public class View {
         private FXMLLoader fxmlLoader;
         private Stage stage;
         private String title;
+        private Window owner;
 
         public ControllerBuilder(Class<T> controllerClass) {
             this.controllerClass = controllerClass;
@@ -79,6 +82,11 @@ public class View {
             return this;
         }
 
+        public ControllerBuilder<T> withModality(Window owner) {
+            this.owner = owner;
+            return this;
+        }
+
         public ControllerBuilder<T> beforeShow(Consumer<T> consumer) {
             consumer.accept(getController());
             return this;
@@ -90,6 +98,11 @@ public class View {
             }
             if (title != null) {
                 stage.setTitle(title);
+            }
+
+            if (owner != null) {
+                stage.initModality(Modality.WINDOW_MODAL);
+                stage.initOwner(owner);
             }
 
             stage.setScene(new Scene(getRoot()));

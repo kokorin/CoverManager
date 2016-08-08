@@ -1,62 +1,74 @@
 package covermanager.view.cover;
 
 import covermanager.domain.Cover;
-import javafx.event.ActionEvent;
+import covermanager.domain.Requester;
+import covermanager.view.EditController;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 import java.util.Objects;
 
-public class CoverController {
-    @FXML
-    protected Parent root;
+public class CoverController extends EditController<Cover> {
     @FXML
     public TextField animeInput;
     @FXML
     public TextField songInput;
-    @FXML
-    protected Button saveButton;
-    @FXML
-    protected Button cancelButton;
-
-    private Cover cover;
-    private boolean save;
 
     @FXML
+    public Button addRequesterButton;
+    @FXML
+    public Button editRequesterButton;
+    @FXML
+    public Button removeRequesterButton;
+    @FXML
+    public TableView<Requester> requestersTable;
+    @FXML
+    public TableColumn<Requester, String> requesterNameColumn;
+    @FXML
+    public TableColumn<Requester, Integer> requesterTotalValueColumn;
+    @FXML
+    public TableColumn<Requester, Integer> requesterPaidValueColumn;
+    @FXML
+    public TableColumn<Requester, String> requesterPaymentSystemColumn;
+
+    @FXML
+    public TableColumn<Requester, String> requesterPaymentDateColumn;
+
+    @Override
     protected void initialize() {
-        Objects.requireNonNull(root);
+        super.initialize();
+
         Objects.requireNonNull(animeInput);
         Objects.requireNonNull(songInput);
-        Objects.requireNonNull(saveButton);
-        Objects.requireNonNull(cancelButton);
 
+        Objects.requireNonNull(addRequesterButton);
+        Objects.requireNonNull(editRequesterButton);
+        Objects.requireNonNull(removeRequesterButton);
+        Objects.requireNonNull(requestersTable);
+        Objects.requireNonNull(requesterNameColumn);
+        Objects.requireNonNull(requesterTotalValueColumn);
+        Objects.requireNonNull(requesterPaidValueColumn);
+        Objects.requireNonNull(requesterPaymentSystemColumn);
+        Objects.requireNonNull(requesterPaymentDateColumn);
 
-        saveButton.setOnAction(this::save);
-        cancelButton.setOnAction(this::close);
+        requesterNameColumn.setCellValueFactory(r -> r.getValue().nameProperty());
+        requesterTotalValueColumn.setCellValueFactory(r -> r.getValue().getPayment().totalValueProperty().asObject());
+        requesterPaidValueColumn.setCellValueFactory(r -> r.getValue().getPayment().paidValueProperty().asObject());
+        requesterPaymentSystemColumn.setCellValueFactory(r -> r.getValue().getPayment().systemProperty().asString());
+        requesterPaymentDateColumn.setCellValueFactory(r -> r.getValue().getPayment().dateProperty().asString());
     }
 
-    protected void save(ActionEvent event) {
-        save = true;
-        close(event);
-    }
+    @Override
+    public void setItem(Cover item) {
+        super.setItem(item);
 
-    protected void close(ActionEvent event) {
-        root.getScene().getWindow().hide();
-    }
+        animeInput.textProperty().bindBidirectional(item.animeProperty());
+        songInput.textProperty().bindBidirectional(item.songProperty());
 
-    public Cover getCover() {
-        return cover;
-    }
+        requestersTable.setItems(item.getRequesters());
 
-    public void setCover(Cover cover) {
-        this.cover = cover;
-        animeInput.textProperty().bindBidirectional(cover.animeProperty());
-        songInput.textProperty().bindBidirectional(cover.songProperty());
-    }
-
-    public boolean isSave() {
-        return save;
     }
 }

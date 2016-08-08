@@ -1,14 +1,11 @@
 package covermanager.domain;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -16,7 +13,7 @@ public class Cover {
     private final StringProperty anime = new SimpleStringProperty();
     private final StringProperty song = new SimpleStringProperty();
     private final IntegerProperty price = new SimpleIntegerProperty();
-    private final ObservableList<Requester> requesters = FXCollections.emptyObservableList();
+    private final ObservableList<Requester> requesters = FXCollections.observableArrayList();
 
     private final ObjectProperty<Assistant> translator = new SimpleObjectProperty<>();
     private final ObjectProperty<Assistant> audioMixer = new SimpleObjectProperty<>();
@@ -64,6 +61,12 @@ public class Cover {
 
     public void setPrice(int price) {
         this.price.set(price);
+    }
+
+    @XmlElementWrapper(name = "reqesters")
+    @XmlElement(name = "requester")
+    public void setRequesters(ObservableList<Requester> items) {
+        requesters.setAll(items);
     }
 
     public ObservableList<Requester> getRequesters() {

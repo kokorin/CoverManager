@@ -1,0 +1,21 @@
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<BorderPane xmlns:fx="http://www.w3.org/1999/xhtml" fx:controller="covermanager.view.requester.RequesterController"
+            fx:id="root" prefWidth="640" prefHeight="480">
+
+    <center>
+        <VBox>
+            <Label text="Name"/>
+            <TextField fx:id="nameInput"/>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox>
+            <Button fx:id="saveButton" text="Save"/>
+            <Button fx:id="cancelButton" text="Cancel"/>
+        </HBox>
+    </bottom>
+</BorderPane>

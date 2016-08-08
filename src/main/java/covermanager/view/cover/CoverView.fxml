@@ -6,18 +6,46 @@
             fx:id="root" prefWidth="640" prefHeight="480">
 
     <center>
-        <VBox>
-            <Label text="Anime"/>
-            <TextField fx:id="animeInput"/>
-            <Label text="Song"/>
-            <TextField fx:id="songInput"/>
-        </VBox>
+        <TabPane>
+            <Tab text="Общее" closable="false">
+                <VBox>
+                    <Label text="Anime"/>
+                    <TextField fx:id="animeInput"/>
+                    <Label text="Song"/>
+                    <TextField fx:id="songInput"/>
+                </VBox>
+            </Tab>
+            <Tab text="Заказчики" closable="false">
+                <VBox>
+                    <HBox>
+                        <Button fx:id="addRequesterButton" text="Добавить"/>
+                        <Button fx:id="editRequesterButton" text="Изменить"/>
+                        <Button fx:id="removeRequesterButton" text="Удалить"/>
+                    </HBox>
+                    <TableView fx:id="requestersTable">
+                        <columnResizePolicy>
+                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                        </columnResizePolicy>
+                        <columns>
+                            <TableColumn fx:id="requesterNameColumn" text="ФИО" prefWidth="100"/>
+                            <TableColumn fx:id="requesterTotalValueColumn" text="Сумма" prefWidth="100"/>
+                            <TableColumn fx:id="requesterPaidValueColumn" text="Переведено" prefWidth="100"/>
+                            <TableColumn fx:id="requesterPaymentSystemColumn" text="Система" prefWidth="100"/>
+                            <TableColumn fx:id="requesterPaymentDateColumn" text="Дата" prefWidth="100"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+            <Tab text="Помощники" closable="false">
+
+            </Tab>
+        </TabPane>
     </center>
 
     <bottom>
         <HBox>
-            <Button fx:id="saveButton" text="Save" />
-            <Button fx:id="cancelButton" text="Cancel" />
+            <Button fx:id="saveButton" text="Save"/>
+            <Button fx:id="cancelButton" text="Cancel"/>
         </HBox>
     </bottom>
 </BorderPane>

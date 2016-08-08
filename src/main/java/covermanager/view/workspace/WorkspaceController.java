@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.BorderPane;
 
 import javax.xml.bind.JAXB;
 import java.io.StringReader;
@@ -20,6 +21,9 @@ import java.util.Objects;
 public class WorkspaceController {
     private final Data data;
     private final View view;
+
+    @FXML
+    public BorderPane root;
 
     @FXML
     protected Button addCover;
@@ -41,6 +45,8 @@ public class WorkspaceController {
 
     @FXML
     protected void initialize() {
+        Objects.requireNonNull(root);
+
         Objects.requireNonNull(data);
         Objects.requireNonNull(view);
 
@@ -90,7 +96,8 @@ public class WorkspaceController {
         CoverController controller = view
                 .forController(CoverController.class)
                 .withTitle("Cover")
-                .beforeShow(cc -> cc.setCover(edtion))
+                .beforeShow(cc -> cc.setItem(edtion))
+                .withModality(root.getScene().getWindow())
                 .showAndWait();
 
         if (controller.isSave()) {

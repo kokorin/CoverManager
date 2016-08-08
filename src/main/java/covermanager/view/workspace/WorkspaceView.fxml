@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.TableColumn?>
 <BorderPane xmlns:fx="http://www.w3.org/1999/xhtml" fx:controller="covermanager.view.workspace.WorkspaceController"
-            prefWidth="640" prefHeight="480">
+            fx:id="root" prefWidth="640" prefHeight="480">
 
     <top>
         <HBox>
