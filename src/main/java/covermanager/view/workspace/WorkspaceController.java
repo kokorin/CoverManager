@@ -2,6 +2,8 @@ package covermanager.view.workspace;
 
 import covermanager.Data;
 import covermanager.domain.Cover;
+import covermanager.util.CloneUtil;
+import covermanager.util.ListUtil;
 import covermanager.view.View;
 import covermanager.view.cover.CoverController;
 import javafx.beans.binding.BooleanBinding;
@@ -73,7 +75,7 @@ public class WorkspaceController {
     }
 
     protected void onAddCoverEvent(ActionEvent event) {
-        editCover(null);
+        editCover(new Cover());
     }
 
     protected void onEditCoverEvent(ActionEvent event) {
@@ -82,16 +84,7 @@ public class WorkspaceController {
     }
 
     protected void editCover(Cover cover) {
-        final Cover edtion;
-
-        if (cover == null) {
-            edtion = new Cover();
-        } else {
-            StringWriter writer = new StringWriter();
-            JAXB.marshal(cover, writer);
-            StringReader reader = new StringReader(writer.toString());
-            edtion = JAXB.unmarshal(reader, Cover.class);
-        }
+        final Cover edtion = CloneUtil.deepClone(cover);
 
         CoverController controller = view
                 .forController(CoverController.class)
@@ -101,12 +94,7 @@ public class WorkspaceController {
                 .showAndWait();
 
         if (controller.isSave()) {
-            int index = data.getCovers().indexOf(cover);
-            if (index == -1) {
-                data.getCovers().add(edtion);
-            } else {
-                data.getCovers().set(index, edtion);
-            }
+            ListUtil.addOrUpdate(data.getCovers(), edtion, cover);
         }
     }
 

@@ -2,6 +2,7 @@ package covermanager;
 
 import covermanager.view.View;
 import covermanager.view.cover.CoverController;
+import covermanager.view.requester.RequesterController;
 import covermanager.view.workspace.WorkspaceController;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -20,6 +21,7 @@ public class CoverManager extends Application {
                 .addComponent(View.class)
                 .addComponent(WorkspaceController.class)
                 .addComponent(CoverController.class)
+                .addComponent(RequesterController.class)
                 .addComponent(new DataProducer().produceData());
 
         this.container = container;

@@ -2,6 +2,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import com.sun.javafx.scene.control.skin.IntegerField?>
 <BorderPane xmlns:fx="http://www.w3.org/1999/xhtml" fx:controller="covermanager.view.requester.RequesterController"
             fx:id="root" prefWidth="640" prefHeight="480">
 
@@ -9,6 +10,25 @@
         <VBox>
             <Label text="Name"/>
             <TextField fx:id="nameInput"/>
+
+            <Label text="Skype"/>
+            <TextField fx:id="skypeInput"/>
+
+            <Label text="VK"/>
+            <TextField fx:id="vkInput"/>
+
+            <Label text="Total value"/>
+            <TextField fx:id="totalValueInput"/>
+
+            <Label text="Paid value"/>
+            <TextField fx:id="paidValueInput"/>
+
+            <Label text="Payment system"/>
+            <ComboBox fx:id="paymentSystemInput"/>
+
+            <Label text="Payment date"/>
+            <DatePicker fx:id="paymentDateInput"/>
+
         </VBox>
     </center>
 
