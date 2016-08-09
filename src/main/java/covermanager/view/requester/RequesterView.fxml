@@ -2,7 +2,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import com.sun.javafx.scene.control.skin.IntegerField?>
 <BorderPane xmlns:fx="http://www.w3.org/1999/xhtml" fx:controller="covermanager.view.requester.RequesterController"
             fx:id="root" prefWidth="640" prefHeight="480">
 

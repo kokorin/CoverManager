@@ -2,12 +2,14 @@ package covermanager.view.requester;
 
 import covermanager.domain.Payment;
 import covermanager.domain.Requester;
+import covermanager.util.IntegerTextFilter;
 import covermanager.view.EditController;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.util.converter.NumberStringConverter;
 
 import java.util.Objects;
@@ -41,6 +43,8 @@ public class RequesterController extends EditController<Requester> {
         Objects.requireNonNull(paymentDateInput);
 
         paymentSystemInput.setItems(FXCollections.observableArrayList(Payment.System.values()));
+        totalValueInput.setTextFormatter(new TextFormatter<>(new IntegerTextFilter()));
+        paidValueInput.setTextFormatter(new TextFormatter<>(new IntegerTextFilter()));
     }
 
     @Override

@@ -1,13 +1,16 @@
 package covermanager.view.cover;
 
 import covermanager.domain.Cover;
+import covermanager.domain.Payment;
 import covermanager.domain.Requester;
 import covermanager.util.CloneUtil;
 import covermanager.util.ListUtil;
 import covermanager.view.EditController;
 import covermanager.view.View;
 import covermanager.view.requester.RequesterController;
+import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
+import javafx.beans.binding.IntegerBinding;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -44,6 +47,10 @@ public class CoverController extends EditController<Cover> {
 
     @FXML
     public TableColumn<Requester, String> requesterPaymentDateColumn;
+    @FXML
+    public TextField priceLabel;
+    @FXML
+    public TextField receivedLabel;
 
     public CoverController(View view) {
         this.view = view;
@@ -89,6 +96,19 @@ public class CoverController extends EditController<Cover> {
         songInput.textProperty().bindBidirectional(item.songProperty());
 
         requestersTable.setItems(item.getRequesters());
+
+        IntegerBinding price = Bindings.createIntegerBinding(
+                () -> item.getRequesters().stream().map(Requester::getPayment).mapToInt(Payment::getTotalValue).sum(),
+                item.getRequesters()
+        );
+        priceLabel.textProperty().bind(price.asString());
+
+
+        IntegerBinding received = Bindings.createIntegerBinding(
+                () -> item.getRequesters().stream().map(Requester::getPayment).mapToInt(Payment::getPaidValue).sum(),
+                item.getRequesters()
+        );
+        receivedLabel.textProperty().bind(received.asString());
     }
 
     protected void onAddRequesterEvent(ActionEvent event) {

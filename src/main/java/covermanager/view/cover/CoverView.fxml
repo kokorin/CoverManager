@@ -13,6 +13,10 @@
                     <TextField fx:id="animeInput"/>
                     <Label text="Song"/>
                     <TextField fx:id="songInput"/>
+                    <Label text="Price"/>
+                    <TextField fx:id="priceLabel" editable="false"/>
+                    <Label text="Received"/>
+                    <TextField fx:id="receivedLabel" editable="false"/>
                 </VBox>
             </Tab>
             <Tab text="Заказчики" closable="false">

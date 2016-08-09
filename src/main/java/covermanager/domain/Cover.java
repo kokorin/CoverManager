@@ -12,20 +12,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Cover {
     private final StringProperty anime = new SimpleStringProperty();
     private final StringProperty song = new SimpleStringProperty();
-    private final IntegerProperty price = new SimpleIntegerProperty();
     private final ObservableList<Requester> requesters = FXCollections.observableArrayList();
 
     private final ObjectProperty<Assistant> translator = new SimpleObjectProperty<>();
     private final ObjectProperty<Assistant> audioMixer = new SimpleObjectProperty<>();
     private final ObjectProperty<Assistant> videoEditor = new SimpleObjectProperty<>();
-
-    public enum State {
-        REQUESTED,
-        PREPAID,
-        PAID,
-        DONE,
-        PUBLISHED
-    }
 
     public String getAnime() {
         return anime.get();
@@ -51,19 +42,7 @@ public class Cover {
         this.song.set(song);
     }
 
-    public int getPrice() {
-        return price.get();
-    }
-
-    public IntegerProperty priceProperty() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price.set(price);
-    }
-
-    @XmlElementWrapper(name = "reqesters")
+    @XmlElementWrapper(name = "requesters")
     @XmlElement(name = "requester")
     public void setRequesters(ObservableList<Requester> items) {
         requesters.setAll(items);
