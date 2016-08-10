@@ -1,7 +1,6 @@
 package covermanager.view.cover;
 
 import covermanager.domain.Cover;
-import covermanager.domain.Payment;
 import covermanager.domain.Requester;
 import covermanager.util.CloneUtil;
 import covermanager.util.ListUtil;
@@ -39,9 +38,9 @@ public class CoverController extends EditController<Cover> {
     @FXML
     public TableColumn<Requester, String> requesterNameColumn;
     @FXML
-    public TableColumn<Requester, Integer> requesterTotalValueColumn;
+    public TableColumn<Requester, Integer> requesterValueColumn;
     @FXML
-    public TableColumn<Requester, Integer> requesterPaidValueColumn;
+    public TableColumn<Requester, Integer> requesterReceivedColumn;
     @FXML
     public TableColumn<Requester, String> requesterPaymentSystemColumn;
 
@@ -68,16 +67,16 @@ public class CoverController extends EditController<Cover> {
         Objects.requireNonNull(removeRequesterButton);
         Objects.requireNonNull(requestersTable);
         Objects.requireNonNull(requesterNameColumn);
-        Objects.requireNonNull(requesterTotalValueColumn);
-        Objects.requireNonNull(requesterPaidValueColumn);
+        Objects.requireNonNull(requesterValueColumn);
+        Objects.requireNonNull(requesterReceivedColumn);
         Objects.requireNonNull(requesterPaymentSystemColumn);
         Objects.requireNonNull(requesterPaymentDateColumn);
 
         requesterNameColumn.setCellValueFactory(r -> r.getValue().nameProperty());
-        requesterTotalValueColumn.setCellValueFactory(r -> r.getValue().getPayment().totalValueProperty().asObject());
-        requesterPaidValueColumn.setCellValueFactory(r -> r.getValue().getPayment().paidValueProperty().asObject());
-        requesterPaymentSystemColumn.setCellValueFactory(r -> r.getValue().getPayment().systemProperty().asString());
-        requesterPaymentDateColumn.setCellValueFactory(r -> r.getValue().getPayment().dateProperty().asString());
+        requesterValueColumn.setCellValueFactory(r -> r.getValue().valueProperty().asObject());
+        requesterReceivedColumn.setCellValueFactory(r -> r.getValue().receivedProperty().asObject());
+        requesterPaymentSystemColumn.setCellValueFactory(r -> r.getValue().paymentSystemProperty().asString());
+        requesterPaymentDateColumn.setCellValueFactory(r -> r.getValue().paymentDateProperty().asString());
 
         BooleanBinding noRequesterSelected  = requestersTable.getSelectionModel().selectedItemProperty().isNull();
         editRequesterButton.disableProperty().bind(noRequesterSelected);
@@ -98,14 +97,14 @@ public class CoverController extends EditController<Cover> {
         requestersTable.setItems(item.getRequesters());
 
         IntegerBinding price = Bindings.createIntegerBinding(
-                () -> item.getRequesters().stream().map(Requester::getPayment).mapToInt(Payment::getTotalValue).sum(),
+                () -> item.getRequesters().stream().mapToInt(Requester::getValue).sum(),
                 item.getRequesters()
         );
         priceLabel.textProperty().bind(price.asString());
 
 
         IntegerBinding received = Bindings.createIntegerBinding(
-                () -> item.getRequesters().stream().map(Requester::getPayment).mapToInt(Payment::getPaidValue).sum(),
+                () -> item.getRequesters().stream().mapToInt(Requester::getReceived).sum(),
                 item.getRequesters()
         );
         receivedLabel.textProperty().bind(received.asString());

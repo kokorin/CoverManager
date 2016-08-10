@@ -17,10 +17,10 @@
             <TextField fx:id="vkInput"/>
 
             <Label text="Total value"/>
-            <TextField fx:id="totalValueInput"/>
+            <TextField fx:id="valueInput"/>
 
             <Label text="Paid value"/>
-            <TextField fx:id="paidValueInput"/>
+            <TextField fx:id="receivedInput"/>
 
             <Label text="Payment system"/>
             <ComboBox fx:id="paymentSystemInput"/>

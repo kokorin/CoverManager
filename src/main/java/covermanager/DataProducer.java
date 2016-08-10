@@ -16,9 +16,9 @@ public class DataProducer {
 
         Requester requester = new Requester();
         requester.setName("Psy");
-        requester.getPayment().setTotalValue(100);
-        requester.getPayment().setPaidValue(70);
-        requester.getPayment().setDate(LocalDate.of(2016, 6, 24));
+        requester.setValue(100);
+        requester.setReceived(70);
+        requester.setPaymentDate(LocalDate.of(2016, 6, 24));
 
         cover.getRequesters().add(requester);
 

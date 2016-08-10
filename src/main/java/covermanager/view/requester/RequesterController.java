@@ -1,6 +1,6 @@
 package covermanager.view.requester;
 
-import covermanager.domain.Payment;
+import covermanager.domain.PaymentSystem;
 import covermanager.domain.Requester;
 import covermanager.util.IntegerTextFilter;
 import covermanager.view.EditController;
@@ -22,11 +22,11 @@ public class RequesterController extends EditController<Requester> {
     @FXML
     public TextField vkInput;
     @FXML
-    public TextField totalValueInput;
+    public TextField valueInput;
     @FXML
-    public TextField paidValueInput;
+    public TextField receivedInput;
     @FXML
-    public ComboBox<Payment.System> paymentSystemInput;
+    public ComboBox<PaymentSystem> paymentSystemInput;
     @FXML
     public DatePicker paymentDateInput;
 
@@ -37,14 +37,14 @@ public class RequesterController extends EditController<Requester> {
         Objects.requireNonNull(nameInput);
         Objects.requireNonNull(skypeInput);
         Objects.requireNonNull(vkInput);
-        Objects.requireNonNull(totalValueInput);
-        Objects.requireNonNull(paidValueInput);
+        Objects.requireNonNull(valueInput);
+        Objects.requireNonNull(receivedInput);
         Objects.requireNonNull(paymentSystemInput);
         Objects.requireNonNull(paymentDateInput);
 
-        paymentSystemInput.setItems(FXCollections.observableArrayList(Payment.System.values()));
-        totalValueInput.setTextFormatter(new TextFormatter<>(new IntegerTextFilter()));
-        paidValueInput.setTextFormatter(new TextFormatter<>(new IntegerTextFilter()));
+        paymentSystemInput.setItems(FXCollections.observableArrayList(PaymentSystem.values()));
+        valueInput.setTextFormatter(new TextFormatter<>(new IntegerTextFilter()));
+        receivedInput.setTextFormatter(new TextFormatter<>(new IntegerTextFilter()));
     }
 
     @Override
@@ -54,12 +54,12 @@ public class RequesterController extends EditController<Requester> {
         nameInput.textProperty().bindBidirectional(item.nameProperty());
         skypeInput.textProperty().bindBidirectional(item.skypeProperty());
         vkInput.textProperty().bindBidirectional(item.vkProperty());
-        totalValueInput.textProperty().bindBidirectional(item.getPayment().totalValueProperty(), new NumberStringConverter());
-        paidValueInput.textProperty().bindBidirectional(item.getPayment().paidValueProperty(), new NumberStringConverter());
+        valueInput.textProperty().bindBidirectional(item.valueProperty(), new NumberStringConverter());
+        receivedInput.textProperty().bindBidirectional(item.receivedProperty(), new NumberStringConverter());
 
-        paymentSystemInput.getSelectionModel().select(item.getPayment().getSystem());
-        item.getPayment().systemProperty().bind(paymentSystemInput.getSelectionModel().selectedItemProperty());
+        paymentSystemInput.getSelectionModel().select(item.getPaymentSystem());
+        item.paymentSystemProperty().bind(paymentSystemInput.getSelectionModel().selectedItemProperty());
 
-        paymentDateInput.valueProperty().bindBidirectional(item.getPayment().dateProperty());
+        paymentDateInput.valueProperty().bindBidirectional(item.paymentDateProperty());
     }
 }

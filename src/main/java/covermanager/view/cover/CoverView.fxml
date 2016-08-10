@@ -32,8 +32,8 @@
                         </columnResizePolicy>
                         <columns>
                             <TableColumn fx:id="requesterNameColumn" text="ФИО" prefWidth="100"/>
-                            <TableColumn fx:id="requesterTotalValueColumn" text="Сумма" prefWidth="100"/>
-                            <TableColumn fx:id="requesterPaidValueColumn" text="Переведено" prefWidth="100"/>
+                            <TableColumn fx:id="requesterValueColumn" text="Сумма" prefWidth="100"/>
+                            <TableColumn fx:id="requesterReceivedColumn" text="Переведено" prefWidth="100"/>
                             <TableColumn fx:id="requesterPaymentSystemColumn" text="Система" prefWidth="100"/>
                             <TableColumn fx:id="requesterPaymentDateColumn" text="Дата" prefWidth="100"/>
                         </columns>
