@@ -1,6 +1,9 @@
 package covermanager.domain;
 
-import javafx.beans.property.*;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -17,6 +20,8 @@ public class Cover {
     private final ObjectProperty<Assistant> translator = new SimpleObjectProperty<>();
     private final ObjectProperty<Assistant> audioMixer = new SimpleObjectProperty<>();
     private final ObjectProperty<Assistant> videoEditor = new SimpleObjectProperty<>();
+
+    private final StringProperty comment = new SimpleStringProperty();
 
     public String getAnime() {
         return anime.get();
@@ -86,5 +91,17 @@ public class Cover {
 
     public void setVideoEditor(Assistant videoEditor) {
         this.videoEditor.set(videoEditor);
+    }
+
+    public String getComment() {
+        return comment.get();
+    }
+
+    public StringProperty commentProperty() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment.set(comment);
     }
 }

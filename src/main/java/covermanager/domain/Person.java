@@ -7,6 +7,7 @@ public abstract class Person {
     private final StringProperty name = new SimpleStringProperty();
     private final StringProperty skype = new SimpleStringProperty();
     private final StringProperty vk = new SimpleStringProperty();
+    private final StringProperty comment = new SimpleStringProperty();
 
     public String getName() {
         return name.get();
@@ -42,5 +43,17 @@ public abstract class Person {
 
     public void setVk(String vk) {
         this.vk.set(vk);
+    }
+
+    public String getComment() {
+        return comment.get();
+    }
+
+    public StringProperty commentProperty() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment.set(comment);
     }
 }

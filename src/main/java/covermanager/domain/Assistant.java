@@ -1,12 +1,16 @@
 package covermanager.domain;
 
+import covermanager.xml.LocalDateAdapter;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 
+@XmlRootElement
 public class Assistant extends Person {
     private final IntegerProperty value = new SimpleIntegerProperty();
     private final IntegerProperty sent = new SimpleIntegerProperty();
@@ -49,6 +53,7 @@ public class Assistant extends Person {
         this.paymentSystem.set(paymentSystem);
     }
 
+    @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     public LocalDate getPaymentDate() {
         return paymentDate.get();
     }
