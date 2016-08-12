@@ -2,6 +2,8 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import covermanager.view.assistant.AssistantComponent?>
+
 <BorderPane xmlns:fx="http://www.w3.org/1999/xhtml" fx:controller="covermanager.view.cover.CoverController"
             fx:id="root" prefWidth="640" prefHeight="480">
 
@@ -41,7 +43,14 @@
                 </VBox>
             </Tab>
             <Tab text="Помощники" closable="false">
-
+                <VBox>
+                    <Label text="Translator"/>
+                    <AssistantComponent/>
+                    <Label text="Audio Mixer"/>
+                    <AssistantComponent/>
+                    <Label text="Video Producer"/>
+                    <AssistantComponent/>
+                </VBox>
             </Tab>
         </TabPane>
     </center>

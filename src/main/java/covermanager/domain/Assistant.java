@@ -1,10 +1,7 @@
 package covermanager.domain;
 
 import covermanager.xml.LocalDateAdapter;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -16,6 +13,9 @@ public class Assistant extends Person {
     private final IntegerProperty sent = new SimpleIntegerProperty();
     private final ObjectProperty<PaymentSystem> paymentSystem = new SimpleObjectProperty<>();
     private final ObjectProperty<LocalDate> paymentDate = new SimpleObjectProperty<>();
+
+    private final BooleanProperty completed = new SimpleBooleanProperty();
+    private final ObjectProperty<LocalDate> completionDate = new SimpleObjectProperty<>();
 
     public int getValue() {
         return value.get();
@@ -64,5 +64,30 @@ public class Assistant extends Person {
 
     public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate.set(paymentDate);
+    }
+
+    public boolean isCompleted() {
+        return completed.get();
+    }
+
+    public BooleanProperty completedProperty() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed.set(completed);
+    }
+
+    @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
+    public LocalDate getCompletionDate() {
+        return completionDate.get();
+    }
+
+    public ObjectProperty<LocalDate> completionDateProperty() {
+        return completionDate;
+    }
+
+    public void setCompletionDate(LocalDate completionDate) {
+        this.completionDate.set(completionDate);
     }
 }

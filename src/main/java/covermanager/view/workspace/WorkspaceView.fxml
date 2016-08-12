@@ -3,9 +3,12 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.TableColumn?>
+<?import javafx.geometry.Insets?>
 <BorderPane xmlns:fx="http://www.w3.org/1999/xhtml" fx:controller="covermanager.view.workspace.WorkspaceController"
             fx:id="root" prefWidth="640" prefHeight="480">
-
+    <padding>
+        <Insets left="5" right="5" top="5" bottom="5"/>
+    </padding>
     <top>
         <HBox>
             <Button fx:id="addCover" text="Add"/>
