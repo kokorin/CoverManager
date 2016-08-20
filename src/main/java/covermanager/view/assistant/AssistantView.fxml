@@ -1,13 +1,16 @@
+<?import covermanager.view.assistant.AssistantController?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<BorderPane xmlns:fx="http://www.w3.org/1999/xhtml" fx:controller="covermanager.view.requester.RequesterController"
-            fx:id="root" prefWidth="640" prefHeight="480">
+<?import javafx.scene.layout.*?>
+<BorderPane fx:id="root" xmlns:fx="http://www.w3.org/1999/xhtml"
+            fx:controller="covermanager.view.assistant.AssistantController"
+            prefWidth="640" prefHeight="480">
 
     <center>
         <ScrollPane fitToWidth="true" fitToHeight="true">
             <VBox>
+                <Label text="Type"/>
+                <ComboBox fx:id="typeInput"/>
+
                 <Label text="Name"/>
                 <TextField fx:id="nameInput"/>
 
@@ -20,8 +23,8 @@
                 <Label text="Total value"/>
                 <TextField fx:id="valueInput"/>
 
-                <Label text="Paid value"/>
-                <TextField fx:id="receivedInput"/>
+                <Label text="Sent value"/>
+                <TextField fx:id="sentInput"/>
 
                 <Label text="Payment system"/>
                 <ComboBox fx:id="paymentSystemInput"/>

@@ -1,6 +1,7 @@
 package covermanager;
 
 import covermanager.view.View;
+import covermanager.view.assistant.AssistantController;
 import covermanager.view.cover.CoverController;
 import covermanager.view.requester.RequesterController;
 import covermanager.view.workspace.WorkspaceController;
@@ -22,6 +23,7 @@ public class CoverManager extends Application {
                 .addComponent(WorkspaceController.class)
                 .addComponent(CoverController.class)
                 .addComponent(RequesterController.class)
+                .addComponent(AssistantController.class)
                 .addComponent(new DataProducer().produceData());
 
         this.container = container;

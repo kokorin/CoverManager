@@ -9,6 +9,7 @@ import java.time.LocalDate;
 
 @XmlRootElement
 public class Assistant extends Person {
+    private final ObjectProperty<Type> type = new SimpleObjectProperty<>();
     private final IntegerProperty value = new SimpleIntegerProperty();
     private final IntegerProperty sent = new SimpleIntegerProperty();
     private final ObjectProperty<PaymentSystem> paymentSystem = new SimpleObjectProperty<>();
@@ -16,6 +17,25 @@ public class Assistant extends Person {
 
     private final BooleanProperty completed = new SimpleBooleanProperty();
     private final ObjectProperty<LocalDate> completionDate = new SimpleObjectProperty<>();
+
+    public enum Type {
+        SOUND_MIXER,
+        VIDEO_COMPOSER,
+        TRANSLATOR,
+        OTHER
+    }
+
+    public Type getType() {
+        return type.get();
+    }
+
+    public ObjectProperty<Type> typeProperty() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type.set(type);
+    }
 
     public int getValue() {
         return value.get();

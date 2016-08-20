@@ -1,9 +1,13 @@
 package covermanager.domain;
 
 import covermanager.xml.LocalDateAdapter;
+import javafx.beans.Observable;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.IntegerBinding;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.util.Callback;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
@@ -17,14 +21,39 @@ public class Cover {
     private final StringProperty song = new SimpleStringProperty();
     private final BooleanProperty published = new SimpleBooleanProperty();
     private final ObjectProperty<LocalDate> publishDate = new SimpleObjectProperty<>();
+    private final ReadOnlyIntegerWrapper price = new ReadOnlyIntegerWrapper();
+    private final ReadOnlyIntegerWrapper received = new ReadOnlyIntegerWrapper();
+    private final ReadOnlyIntegerWrapper fee = new ReadOnlyIntegerWrapper();
+    private final ReadOnlyIntegerWrapper sent = new ReadOnlyIntegerWrapper();
 
     private final ObservableList<Requester> requesters = FXCollections.observableArrayList();
-    //TODO make Assistants List instead of separate fields.
-    private final ObjectProperty<Assistant> translator = new SimpleObjectProperty<>();
-    private final ObjectProperty<Assistant> audioMixer = new SimpleObjectProperty<>();
-    private final ObjectProperty<Assistant> videoEditor = new SimpleObjectProperty<>();
+    private final ObservableList<Assistant> assistants = FXCollections.observableArrayList();
 
     private final StringProperty comment = new SimpleStringProperty();
+
+    public static final Callback<Cover, Observable[]> EXTRACTOR = c -> new Observable[]{
+            c.anime, c.song, c.published, c.publishDate, c.requesters, c.assistants
+    };
+
+    public Cover() {
+        price.bind(Bindings.createIntegerBinding(
+                () -> requesters.stream().mapToInt(Requester::getValue).sum(),
+                requesters
+        ));
+        received.bind(Bindings.createIntegerBinding(
+                () -> requesters.stream().mapToInt(Requester::getReceived).sum(),
+                requesters
+        ));
+
+        fee.bind(Bindings.createIntegerBinding(
+                () -> assistants.stream().mapToInt(Assistant::getValue).sum(),
+                assistants
+        ));
+        sent.bind(Bindings.createIntegerBinding(
+                () -> assistants.stream().mapToInt(Assistant::getSent).sum(),
+                assistants
+        ));
+    }
 
     public String getAnime() {
         return anime.get();
@@ -75,50 +104,56 @@ public class Cover {
         this.publishDate.set(publishDate);
     }
 
+    public int getPrice() {
+        return price.get();
+    }
+
+    public ReadOnlyIntegerProperty priceProperty() {
+        return price.getReadOnlyProperty();
+    }
+
+    public int getReceived() {
+        return received.get();
+    }
+
+    public ReadOnlyIntegerProperty receivedProperty() {
+        return received.getReadOnlyProperty();
+    }
+
+    public int getFee() {
+        return fee.get();
+    }
+
+    public ReadOnlyIntegerProperty feeProperty() {
+        return fee.getReadOnlyProperty();
+    }
+
+    public int getSent() {
+        return sent.get();
+    }
+
+    public ReadOnlyIntegerProperty sentProperty() {
+        return sent.getReadOnlyProperty();
+    }
+
     @XmlElementWrapper(name = "requesters")
     @XmlElement(name = "requester")
-    public void setRequesters(ObservableList<Requester> items) {
-        requesters.setAll(items);
+    public void setRequesters(ObservableList<Requester> requesters) {
+        this.requesters.setAll(requesters);
     }
 
     public ObservableList<Requester> getRequesters() {
         return requesters;
     }
 
-    public Assistant getTranslator() {
-        return translator.get();
+    @XmlElementWrapper(name = "assistants")
+    @XmlElement(name = "assistant")
+    public void setAssistants(ObservableList<Assistant> assistants) {
+        this.assistants.setAll(assistants);
     }
 
-    public ObjectProperty<Assistant> translatorProperty() {
-        return translator;
-    }
-
-    public void setTranslator(Assistant translator) {
-        this.translator.set(translator);
-    }
-
-    public Assistant getAudioMixer() {
-        return audioMixer.get();
-    }
-
-    public ObjectProperty<Assistant> audioMixerProperty() {
-        return audioMixer;
-    }
-
-    public void setAudioMixer(Assistant audioMixer) {
-        this.audioMixer.set(audioMixer);
-    }
-
-    public Assistant getVideoEditor() {
-        return videoEditor.get();
-    }
-
-    public ObjectProperty<Assistant> videoEditorProperty() {
-        return videoEditor;
-    }
-
-    public void setVideoEditor(Assistant videoEditor) {
-        this.videoEditor.set(videoEditor);
+    public ObservableList<Assistant> getAssistants() {
+        return assistants;
     }
 
     public String getComment() {

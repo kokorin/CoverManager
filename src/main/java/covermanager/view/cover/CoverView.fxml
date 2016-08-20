@@ -1,9 +1,5 @@
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import covermanager.view.assistant.AssistantComponent?>
-
+<?import javafx.scene.layout.*?>
 <BorderPane xmlns:fx="http://www.w3.org/1999/xhtml" fx:controller="covermanager.view.cover.CoverController"
             fx:id="root" prefWidth="640" prefHeight="480">
 
@@ -19,6 +15,12 @@
                     <TextField fx:id="priceLabel" editable="false"/>
                     <Label text="Received"/>
                     <TextField fx:id="receivedLabel" editable="false"/>
+                    <Label text="Fee"/>
+                    <TextField fx:id="feeLabel" editable="false"/>
+                    <Label text="Send"/>
+                    <TextField fx:id="sendLabel" editable="false"/>
+                    <Label text="Published"/>
+                    <CheckBox fx:id="publishedInput"/>
                 </VBox>
             </Tab>
             <Tab text="Заказчики" closable="false">
@@ -44,12 +46,24 @@
             </Tab>
             <Tab text="Помощники" closable="false">
                 <VBox>
-                    <Label text="Translator"/>
-                    <AssistantComponent/>
-                    <Label text="Audio Mixer"/>
-                    <AssistantComponent/>
-                    <Label text="Video Producer"/>
-                    <AssistantComponent/>
+                    <HBox>
+                        <Button fx:id="addAssistantButton" text="Добавить"/>
+                        <Button fx:id="editAssistantButton" text="Изменить"/>
+                        <Button fx:id="removeAssistantButton" text="Удалить"/>
+                    </HBox>
+                    <TableView fx:id="assistantsTable">
+                        <columnResizePolicy>
+                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                        </columnResizePolicy>
+                        <columns>
+                            <TableColumn fx:id="assistantTypeColumn" text="Тип" prefWidth="100"/>
+                            <TableColumn fx:id="assistantNameColumn" text="ФИО" prefWidth="100"/>
+                            <TableColumn fx:id="assistantValueColumn" text="Сумма" prefWidth="100"/>
+                            <TableColumn fx:id="assistantSentColumn" text="Переведено" prefWidth="100"/>
+                            <TableColumn fx:id="assistantPaymentSystemColumn" text="Система" prefWidth="100"/>
+                            <TableColumn fx:id="assistantPaymentDateColumn" text="Дата" prefWidth="100"/>
+                        </columns>
+                    </TableView>
                 </VBox>
             </Tab>
         </TabPane>

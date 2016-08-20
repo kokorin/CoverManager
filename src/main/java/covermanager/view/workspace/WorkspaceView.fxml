@@ -4,6 +4,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.geometry.Insets?>
+<?import covermanager.util.TableUtil?>
 <BorderPane xmlns:fx="http://www.w3.org/1999/xhtml" fx:controller="covermanager.view.workspace.WorkspaceController"
             fx:id="root" prefWidth="640" prefHeight="480">
     <padding>
@@ -19,11 +20,16 @@
     <center>
         <TableView fx:id="coverTable">
             <columnResizePolicy>
-                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                <TableUtil fx:constant="PERCENTAGE_RESIZE_POLICY"/>
             </columnResizePolicy>
             <columns>
                 <TableColumn fx:id="animeColumn" text="Anime" prefWidth="150"/>
                 <TableColumn fx:id="songColumn" text="Song" prefWidth="200"/>
+                <TableColumn fx:id="publishedColumn" text="Published" prefWidth="50"/>
+                <TableColumn fx:id="priceColumn" text="Price" prefWidth="50" />
+                <TableColumn fx:id="receivedColumn" text="Received" prefWidth="50"/>
+                <TableColumn fx:id="feeColumn" text="Fee" prefWidth="50"/>
+                <TableColumn fx:id="sentColumn" text="Sent" prefWidth="50"/>
             </columns>
         </TableView>
     </center>

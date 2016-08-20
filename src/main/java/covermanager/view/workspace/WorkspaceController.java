@@ -1,6 +1,6 @@
 package covermanager.view.workspace;
 
-import covermanager.Data;
+import covermanager.domain.Data;
 import covermanager.domain.Cover;
 import covermanager.util.CloneUtil;
 import covermanager.util.ListUtil;
@@ -14,9 +14,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 
-import javax.xml.bind.JAXB;
-import java.io.StringReader;
-import java.io.StringWriter;
 import java.util.Objects;
 
 
@@ -25,8 +22,7 @@ public class WorkspaceController {
     private final View view;
 
     @FXML
-    public BorderPane root;
-
+    protected BorderPane root;
     @FXML
     protected Button addCover;
     @FXML
@@ -39,6 +35,16 @@ public class WorkspaceController {
     protected TableColumn<Cover, String> animeColumn;
     @FXML
     protected TableColumn<Cover, String> songColumn;
+    @FXML
+    protected TableColumn<Cover, Boolean> publishedColumn;
+    @FXML
+    protected TableColumn<Cover, Number> priceColumn;
+    @FXML
+    protected TableColumn<Cover, Number> receivedColumn;
+    @FXML
+    protected TableColumn<Cover, Number> feeColumn;
+    @FXML
+    protected TableColumn<Cover, Number> sentColumn;
 
     public WorkspaceController(Data data, View view) {
         this.data = data;
@@ -59,15 +65,24 @@ public class WorkspaceController {
         Objects.requireNonNull(coverTable);
         Objects.requireNonNull(animeColumn);
         Objects.requireNonNull(songColumn);
-
+        Objects.requireNonNull(publishedColumn);
+        Objects.requireNonNull(priceColumn);
+        Objects.requireNonNull(receivedColumn);
+        Objects.requireNonNull(feeColumn);
+        Objects.requireNonNull(sentColumn);
 
         BooleanBinding noItemSelected = coverTable.getSelectionModel().selectedItemProperty().isNull();
         editCover.disableProperty().bind(noItemSelected);
         removeCover.disableProperty().bind(noItemSelected);
 
         coverTable.setItems(data.getCovers());
-        animeColumn.setCellValueFactory(cellData -> cellData.getValue().animeProperty());
-        songColumn.setCellValueFactory(cellData -> cellData.getValue().songProperty());
+        animeColumn.setCellValueFactory(c -> c.getValue().animeProperty());
+        songColumn.setCellValueFactory(c -> c.getValue().songProperty());
+        publishedColumn.setCellValueFactory(c -> c.getValue().publishedProperty());
+        priceColumn.setCellValueFactory(c -> c.getValue().priceProperty());
+        receivedColumn.setCellValueFactory(c -> c.getValue().receivedProperty());
+        feeColumn.setCellValueFactory(c -> c.getValue().feeProperty());
+        sentColumn.setCellValueFactory(c -> c.getValue().sentProperty());
 
         addCover.setOnAction(this::onAddCoverEvent);
         editCover.setOnAction(this::onEditCoverEvent);
