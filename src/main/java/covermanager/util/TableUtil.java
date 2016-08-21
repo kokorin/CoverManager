@@ -22,8 +22,8 @@ public class TableUtil {
             double delta = param.getDelta();
 
             List<? extends TableColumn<?, ?>> columns = table.getVisibleLeafColumns();
-            double totalWidth = columns.stream().mapToDouble(TableColumn::getWidth).sum();
-            double totalPrefWidth = columns.stream().mapToDouble(TableColumn::getPrefWidth).sum();
+            double totalWidth = columns.stream().mapToDouble(TableColumn::getWidth).sum() + 2;
+            double totalPrefWidth = columns.stream().mapToDouble(TableColumn::getPrefWidth).sum() + 2;
 
             if (totalPrefWidth < 1.0) {
                 return false;

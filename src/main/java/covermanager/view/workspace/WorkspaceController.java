@@ -6,9 +6,11 @@ import covermanager.util.CloneUtil;
 import covermanager.util.ListUtil;
 import covermanager.view.View;
 import covermanager.view.cover.CoverController;
+import covermanager.view.table.TableEdit;
 import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -22,15 +24,9 @@ public class WorkspaceController {
     private final View view;
 
     @FXML
-    protected BorderPane root;
+    protected Parent root;
     @FXML
-    protected Button addCover;
-    @FXML
-    protected Button editCover;
-    @FXML
-    protected Button removeCover;
-    @FXML
-    protected TableView<Cover> coverTable;
+    protected TableEdit<Cover> coverTable;
     @FXML
     protected TableColumn<Cover, String> animeColumn;
     @FXML
@@ -58,10 +54,6 @@ public class WorkspaceController {
         Objects.requireNonNull(data);
         Objects.requireNonNull(view);
 
-        Objects.requireNonNull(addCover);
-        Objects.requireNonNull(editCover);
-        Objects.requireNonNull(removeCover);
-
         Objects.requireNonNull(coverTable);
         Objects.requireNonNull(animeColumn);
         Objects.requireNonNull(songColumn);
@@ -71,10 +63,6 @@ public class WorkspaceController {
         Objects.requireNonNull(feeColumn);
         Objects.requireNonNull(sentColumn);
 
-        BooleanBinding noItemSelected = coverTable.getSelectionModel().selectedItemProperty().isNull();
-        editCover.disableProperty().bind(noItemSelected);
-        removeCover.disableProperty().bind(noItemSelected);
-
         coverTable.setItems(data.getCovers());
         animeColumn.setCellValueFactory(c -> c.getValue().animeProperty());
         songColumn.setCellValueFactory(c -> c.getValue().songProperty());
@@ -83,22 +71,20 @@ public class WorkspaceController {
         receivedColumn.setCellValueFactory(c -> c.getValue().receivedProperty());
         feeColumn.setCellValueFactory(c -> c.getValue().feeProperty());
         sentColumn.setCellValueFactory(c -> c.getValue().sentProperty());
-
-        addCover.setOnAction(this::onAddCoverEvent);
-        editCover.setOnAction(this::onEditCoverEvent);
-        removeCover.setOnAction(this::onRemoveCoverEvent);
     }
 
-    protected void onAddCoverEvent(ActionEvent event) {
+    @FXML
+    protected void onAddCover(ActionEvent event) {
         editCover(new Cover());
     }
 
-    protected void onEditCoverEvent(ActionEvent event) {
-        Cover cover = coverTable.getSelectionModel().getSelectedItem();
+    @FXML
+    protected void onEditCover(ActionEvent event) {
+        Cover cover = coverTable.getSelectedItem();
         editCover(cover);
     }
 
-    protected void editCover(Cover cover) {
+    private void editCover(Cover cover) {
         final Cover edtion = CloneUtil.deepClone(cover);
 
         CoverController controller = view
@@ -113,8 +99,9 @@ public class WorkspaceController {
         }
     }
 
-    protected void onRemoveCoverEvent(ActionEvent event) {
-        Cover cover = coverTable.getSelectionModel().getSelectedItem();
+    @FXML
+    protected void onRemoveCover(ActionEvent event) {
+        Cover cover = coverTable.getSelectedItem();
         data.getCovers().remove(cover);
     }
 }

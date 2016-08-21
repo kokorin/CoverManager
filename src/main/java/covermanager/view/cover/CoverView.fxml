@@ -1,5 +1,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import covermanager.view.table.TableEdit?>
 <BorderPane xmlns:fx="http://www.w3.org/1999/xhtml" fx:controller="covermanager.view.cover.CoverController"
             fx:id="root" prefWidth="640" prefHeight="480">
 
@@ -24,47 +25,27 @@
                 </VBox>
             </Tab>
             <Tab text="Заказчики" closable="false">
-                <VBox>
-                    <HBox>
-                        <Button fx:id="addRequesterButton" text="Добавить"/>
-                        <Button fx:id="editRequesterButton" text="Изменить"/>
-                        <Button fx:id="removeRequesterButton" text="Удалить"/>
-                    </HBox>
-                    <TableView fx:id="requestersTable">
-                        <columnResizePolicy>
-                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
-                        </columnResizePolicy>
-                        <columns>
-                            <TableColumn fx:id="requesterNameColumn" text="ФИО" prefWidth="100"/>
-                            <TableColumn fx:id="requesterValueColumn" text="Сумма" prefWidth="100"/>
-                            <TableColumn fx:id="requesterReceivedColumn" text="Переведено" prefWidth="100"/>
-                            <TableColumn fx:id="requesterPaymentSystemColumn" text="Система" prefWidth="100"/>
-                            <TableColumn fx:id="requesterPaymentDateColumn" text="Дата" prefWidth="100"/>
-                        </columns>
-                    </TableView>
-                </VBox>
+                <TableEdit fx:id="requestersTable" onAdd="#onAddRequester" onEdit="#onEditRequester" onRemove="#onRemoveRequester">
+                    <columns>
+                        <TableColumn fx:id="requesterNameColumn" text="ФИО" prefWidth="100"/>
+                        <TableColumn fx:id="requesterValueColumn" text="Сумма" prefWidth="100"/>
+                        <TableColumn fx:id="requesterReceivedColumn" text="Переведено" prefWidth="100"/>
+                        <TableColumn fx:id="requesterPaymentSystemColumn" text="Система" prefWidth="100"/>
+                        <TableColumn fx:id="requesterPaymentDateColumn" text="Дата" prefWidth="100"/>
+                    </columns>
+                </TableEdit>
             </Tab>
             <Tab text="Помощники" closable="false">
-                <VBox>
-                    <HBox>
-                        <Button fx:id="addAssistantButton" text="Добавить"/>
-                        <Button fx:id="editAssistantButton" text="Изменить"/>
-                        <Button fx:id="removeAssistantButton" text="Удалить"/>
-                    </HBox>
-                    <TableView fx:id="assistantsTable">
-                        <columnResizePolicy>
-                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
-                        </columnResizePolicy>
-                        <columns>
-                            <TableColumn fx:id="assistantTypeColumn" text="Тип" prefWidth="100"/>
-                            <TableColumn fx:id="assistantNameColumn" text="ФИО" prefWidth="100"/>
-                            <TableColumn fx:id="assistantValueColumn" text="Сумма" prefWidth="100"/>
-                            <TableColumn fx:id="assistantSentColumn" text="Переведено" prefWidth="100"/>
-                            <TableColumn fx:id="assistantPaymentSystemColumn" text="Система" prefWidth="100"/>
-                            <TableColumn fx:id="assistantPaymentDateColumn" text="Дата" prefWidth="100"/>
-                        </columns>
-                    </TableView>
-                </VBox>
+                <TableEdit fx:id="assistantsTable" onAdd="#onAddAssistant" onEdit="#onEditAssistant" onRemove="#onRemoveAssistant">
+                    <columns>
+                        <TableColumn fx:id="assistantTypeColumn" text="Тип" prefWidth="100"/>
+                        <TableColumn fx:id="assistantNameColumn" text="ФИО" prefWidth="100"/>
+                        <TableColumn fx:id="assistantValueColumn" text="Сумма" prefWidth="100"/>
+                        <TableColumn fx:id="assistantSentColumn" text="Переведено" prefWidth="100"/>
+                        <TableColumn fx:id="assistantPaymentSystemColumn" text="Система" prefWidth="100"/>
+                        <TableColumn fx:id="assistantPaymentDateColumn" text="Дата" prefWidth="100"/>
+                    </columns>
+                </TableEdit>
             </Tab>
         </TabPane>
     </center>

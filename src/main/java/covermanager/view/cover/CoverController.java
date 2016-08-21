@@ -9,12 +9,11 @@ import covermanager.view.EditController;
 import covermanager.view.View;
 import covermanager.view.assistant.AssistantController;
 import covermanager.view.requester.RequesterController;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.BooleanBinding;
-import javafx.beans.binding.IntegerBinding;
-import javafx.event.ActionEvent;
+import covermanager.view.table.TableEdit;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TextField;
 
 import java.util.Objects;
 
@@ -35,13 +34,7 @@ public class CoverController extends EditController<Cover> {
     protected TextField sendLabel;
 
     @FXML
-    protected Button addRequesterButton;
-    @FXML
-    protected Button editRequesterButton;
-    @FXML
-    protected Button removeRequesterButton;
-    @FXML
-    protected TableView<Requester> requestersTable;
+    protected TableEdit<Requester> requestersTable;
     @FXML
     protected TableColumn<Requester, String> requesterNameColumn;
     @FXML
@@ -50,17 +43,11 @@ public class CoverController extends EditController<Cover> {
     protected TableColumn<Requester, Number> requesterReceivedColumn;
     @FXML
     protected TableColumn<Requester, String> requesterPaymentSystemColumn;
-
     @FXML
     protected TableColumn<Requester, String> requesterPaymentDateColumn;
+
     @FXML
-    protected Button addAssistantButton;
-    @FXML
-    protected Button editAssistantButton;
-    @FXML
-    protected Button removeAssistantButton;
-    @FXML
-    protected TableView<Assistant> assistantsTable;
+    protected TableEdit<Assistant> assistantsTable;
     @FXML
     protected TableColumn<Assistant, String> assistantTypeColumn;
     @FXML
@@ -88,9 +75,6 @@ public class CoverController extends EditController<Cover> {
         Objects.requireNonNull(animeInput);
         Objects.requireNonNull(songInput);
 
-        Objects.requireNonNull(addRequesterButton);
-        Objects.requireNonNull(editRequesterButton);
-        Objects.requireNonNull(removeRequesterButton);
         Objects.requireNonNull(requestersTable);
         Objects.requireNonNull(requesterNameColumn);
         Objects.requireNonNull(requesterValueColumn);
@@ -98,9 +82,6 @@ public class CoverController extends EditController<Cover> {
         Objects.requireNonNull(requesterPaymentSystemColumn);
         Objects.requireNonNull(requesterPaymentDateColumn);
 
-        Objects.requireNonNull(addAssistantButton);
-        Objects.requireNonNull(editAssistantButton);
-        Objects.requireNonNull(removeAssistantButton);
         Objects.requireNonNull(assistantsTable);
         Objects.requireNonNull(assistantTypeColumn);
         Objects.requireNonNull(assistantNameColumn);
@@ -109,27 +90,12 @@ public class CoverController extends EditController<Cover> {
         Objects.requireNonNull(assistantPaymentSystemColumn);
         Objects.requireNonNull(assistantPaymentDateColumn);
 
-        BooleanBinding noRequesterSelected  = requestersTable.getSelectionModel().selectedItemProperty().isNull();
-        editRequesterButton.disableProperty().bind(noRequesterSelected);
-        removeRequesterButton.disableProperty().bind(noRequesterSelected);
-
-        addRequesterButton.setOnAction(this::onAddRequesterEvent);
-        editRequesterButton.setOnAction(this::onEditRequesterEvent);
-        removeRequesterButton.setOnAction(this::onRemoveRequesterEvent);
 
         requesterNameColumn.setCellValueFactory(r -> r.getValue().nameProperty());
         requesterValueColumn.setCellValueFactory(r -> r.getValue().valueProperty());
         requesterReceivedColumn.setCellValueFactory(r -> r.getValue().receivedProperty());
         requesterPaymentSystemColumn.setCellValueFactory(r -> r.getValue().paymentSystemProperty().asString());
         requesterPaymentDateColumn.setCellValueFactory(r -> r.getValue().paymentDateProperty().asString());
-
-        BooleanBinding noAssistantSelected  = assistantsTable.getSelectionModel().selectedItemProperty().isNull();
-        editAssistantButton.disableProperty().bind(noAssistantSelected);
-        removeAssistantButton.disableProperty().bind(noAssistantSelected);
-
-        addAssistantButton.setOnAction(this::onAddAssistantEvent);
-        editAssistantButton.setOnAction(this::onEditAssistantEvent);
-        removeAssistantButton.setOnAction(this::onRemoveAssistantEvent);
 
         assistantTypeColumn.setCellValueFactory(a -> a.getValue().typeProperty().asString());
         assistantNameColumn.setCellValueFactory(a -> a.getValue().nameProperty());
@@ -157,17 +123,20 @@ public class CoverController extends EditController<Cover> {
         sendLabel.textProperty().bind(item.sentProperty().asString());
     }
 
-    private void onAddRequesterEvent(ActionEvent event) {
+    @FXML
+    protected void onAddRequester() {
         editRequester(new Requester());
     }
 
-    private void onEditRequesterEvent(ActionEvent event) {
-        Requester requester = requestersTable.getSelectionModel().getSelectedItem();
+    @FXML
+    protected void onEditRequester() {
+        Requester requester = requestersTable.getSelectedItem();
         editRequester(requester);
     }
 
-    private void onRemoveRequesterEvent(ActionEvent event) {
-        Requester requester = requestersTable.getSelectionModel().getSelectedItem();
+    @FXML
+    protected void onRemoveRequester() {
+        Requester requester = requestersTable.getSelectedItem();
         getItem().getRequesters().remove(requester);
     }
 
@@ -187,17 +156,20 @@ public class CoverController extends EditController<Cover> {
     }
 
 
-    private void onAddAssistantEvent(ActionEvent event) {
+    @FXML
+    protected void onAddAssistant() {
         editAssistant(new Assistant());
     }
 
-    private void onEditAssistantEvent(ActionEvent event) {
-        Assistant assistant = assistantsTable.getSelectionModel().getSelectedItem();
+    @FXML
+    protected void onEditAssistant() {
+        Assistant assistant = assistantsTable.getSelectedItem();
         editAssistant(assistant);
     }
 
-    private void onRemoveAssistantEvent(ActionEvent event) {
-        Assistant assistant = assistantsTable.getSelectionModel().getSelectedItem();
+    @FXML
+    protected void onRemoveAssistant() {
+        Assistant assistant = assistantsTable.getSelectedItem();
         getItem().getAssistants().remove(assistant);
     }
 

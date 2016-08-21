@@ -1,36 +1,18 @@
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.geometry.Insets?>
-<?import covermanager.util.TableUtil?>
-<BorderPane xmlns:fx="http://www.w3.org/1999/xhtml" fx:controller="covermanager.view.workspace.WorkspaceController"
-            fx:id="root" prefWidth="640" prefHeight="480">
-    <padding>
-        <Insets left="5" right="5" top="5" bottom="5"/>
-    </padding>
-    <top>
-        <HBox>
-            <Button fx:id="addCover" text="Add"/>
-            <Button fx:id="editCover" text="Edit"/>
-            <Button fx:id="removeCover" text="Remove"/>
-        </HBox>
-    </top>
-    <center>
-        <TableView fx:id="coverTable">
-            <columnResizePolicy>
-                <TableUtil fx:constant="PERCENTAGE_RESIZE_POLICY"/>
-            </columnResizePolicy>
-            <columns>
-                <TableColumn fx:id="animeColumn" text="Anime" prefWidth="150"/>
-                <TableColumn fx:id="songColumn" text="Song" prefWidth="200"/>
-                <TableColumn fx:id="publishedColumn" text="Published" prefWidth="50"/>
-                <TableColumn fx:id="priceColumn" text="Price" prefWidth="50" />
-                <TableColumn fx:id="receivedColumn" text="Received" prefWidth="50"/>
-                <TableColumn fx:id="feeColumn" text="Fee" prefWidth="50"/>
-                <TableColumn fx:id="sentColumn" text="Sent" prefWidth="50"/>
-            </columns>
-        </TableView>
-    </center>
-</BorderPane>
+<?import covermanager.view.table.TableEdit?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://www.w3.org/1999/xhtml" fx:controller="covermanager.view.workspace.WorkspaceController"
+      fx:id="root" prefWidth="640" prefHeight="480">
+    <TableEdit fx:id="coverTable" VBox.vgrow="ALWAYS"
+               onAdd="#onAddCover" onEdit="#onEditCover" onRemove="#onRemoveCover">
+        <columns>
+            <TableColumn fx:id="animeColumn" text="Anime" prefWidth="150"/>
+            <TableColumn fx:id="songColumn" text="Song" prefWidth="200"/>
+            <TableColumn fx:id="publishedColumn" text="Published" prefWidth="50"/>
+            <TableColumn fx:id="priceColumn" text="Price" prefWidth="50"/>
+            <TableColumn fx:id="receivedColumn" text="Received" prefWidth="50"/>
+            <TableColumn fx:id="feeColumn" text="Fee" prefWidth="50"/>
+            <TableColumn fx:id="sentColumn" text="Sent" prefWidth="50"/>
+        </columns>
+    </TableEdit>
+</VBox>
