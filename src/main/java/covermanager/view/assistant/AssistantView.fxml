@@ -1,47 +1,50 @@
-<?import covermanager.view.assistant.AssistantController?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<BorderPane fx:id="root" xmlns:fx="http://www.w3.org/1999/xhtml"
-            fx:controller="covermanager.view.assistant.AssistantController"
-            prefWidth="640" prefHeight="480">
+<?import covermanager.view.edit.EditFooter?>
+<?import javafx.geometry.Insets?>
+<VBox fx:id="root" xmlns:fx="http://www.w3.org/1999/xhtml"
+          fx:controller="covermanager.view.assistant.AssistantController"
+          prefWidth="640" prefHeight="480">
+    <ScrollPane fitToWidth="true" fitToHeight="true" VBox.vgrow="ALWAYS">
+        <GridPane hgap="5" vgap="5">
+            <padding>
+                <Insets left="5" right="5" top="5" bottom="5"/>
+            </padding>
 
-    <center>
-        <ScrollPane fitToWidth="true" fitToHeight="true">
-            <VBox>
-                <Label text="Type"/>
-                <ComboBox fx:id="typeInput"/>
+            <columnConstraints>
+                <ColumnConstraints halignment="RIGHT"/>
+                <ColumnConstraints hgrow="ALWAYS"/>
+            </columnConstraints>
 
-                <Label text="Name"/>
-                <TextField fx:id="nameInput"/>
+            <Label text="Type" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <ComboBox fx:id="typeInput" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-                <Label text="Skype"/>
-                <TextField fx:id="skypeInput"/>
+            <Label text="Name" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <TextField fx:id="nameInput" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-                <Label text="VK"/>
-                <TextField fx:id="vkInput"/>
+            <Label text="Skype" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <TextField fx:id="skypeInput" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
-                <Label text="Total value"/>
-                <TextField fx:id="valueInput"/>
+            <Label text="VK" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+            <TextField fx:id="vkInput" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
 
-                <Label text="Sent value"/>
-                <TextField fx:id="sentInput"/>
+            <Label text="Total value" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+            <TextField fx:id="valueInput" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
 
-                <Label text="Payment system"/>
-                <ComboBox fx:id="paymentSystemInput"/>
+            <Label text="Sent value" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+            <TextField fx:id="sentInput" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
 
-                <Label text="Payment date"/>
-                <DatePicker fx:id="paymentDateInput"/>
+            <Label text="Payment system" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+            <ComboBox fx:id="paymentSystemInput" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
 
-                <Label text="Comment"/>
-                <TextArea fx:id="commentInput" minHeight="75" VBox.vgrow="ALWAYS"/>
-            </VBox>
-        </ScrollPane>
-    </center>
+            <Label text="Payment date" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+            <DatePicker fx:id="paymentDateInput" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
 
-    <bottom>
-        <HBox>
-            <Button fx:id="saveButton" text="Save"/>
-            <Button fx:id="cancelButton" text="Cancel"/>
-        </HBox>
-    </bottom>
-</BorderPane>
+            <Label text="Comment" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+            <TextArea fx:id="commentInput" GridPane.rowIndex="8" GridPane.columnIndex="1"
+                      GridPane.fillHeight="true"/>
+        </GridPane>
+    </ScrollPane>
+
+    <EditFooter onSave="#save" onCancel="#cancel"/>
+</VBox>

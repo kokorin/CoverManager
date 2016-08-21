@@ -1,19 +1,13 @@
 package covermanager.view;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
 
 import java.util.Objects;
 
 public abstract class EditController<T> {
     @FXML
     protected Parent root;
-    @FXML
-    protected Button saveButton;
-    @FXML
-    protected Button cancelButton;
 
     private T item;
     private boolean save;
@@ -21,20 +15,18 @@ public abstract class EditController<T> {
     @FXML
     protected void initialize() {
         Objects.requireNonNull(root);
-        Objects.requireNonNull(saveButton);
-        Objects.requireNonNull(cancelButton);
-
-
-        saveButton.setOnAction(this::save);
-        cancelButton.setOnAction(this::close);
     }
 
-    protected void save(ActionEvent event) {
+    public void save() {
         save = true;
-        close(event);
+        close();
     }
 
-    protected void close(ActionEvent event) {
+    public void cancel() {
+        close();
+    }
+
+    protected void close() {
         root.getScene().getWindow().hide();
     }
 

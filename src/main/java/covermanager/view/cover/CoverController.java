@@ -13,17 +13,18 @@ import covermanager.view.table.TableEdit;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.util.Objects;
 
 public class CoverController extends EditController<Cover> {
     private final View view;
-
     @FXML
     protected TextField animeInput;
     @FXML
     protected TextField songInput;
+
     @FXML
     protected TextField priceLabel;
     @FXML
@@ -31,7 +32,9 @@ public class CoverController extends EditController<Cover> {
     @FXML
     protected TextField feeLabel;
     @FXML
-    protected TextField sendLabel;
+    protected TextField sentLabel;
+    @FXML
+    protected TextArea commentInput;
 
     @FXML
     protected TableEdit<Requester> requestersTable;
@@ -74,6 +77,12 @@ public class CoverController extends EditController<Cover> {
 
         Objects.requireNonNull(animeInput);
         Objects.requireNonNull(songInput);
+        Objects.requireNonNull(songInput);
+        Objects.requireNonNull(priceLabel);
+        Objects.requireNonNull(receivedLabel);
+        Objects.requireNonNull(feeLabel);
+        Objects.requireNonNull(sentLabel);
+        Objects.requireNonNull(commentInput);
 
         Objects.requireNonNull(requestersTable);
         Objects.requireNonNull(requesterNameColumn);
@@ -113,6 +122,7 @@ public class CoverController extends EditController<Cover> {
         animeInput.textProperty().bindBidirectional(item.animeProperty());
         songInput.textProperty().bindBidirectional(item.songProperty());
         publishedInput.selectedProperty().bindBidirectional(item.publishedProperty());
+        commentInput.textProperty().bindBidirectional(item.commentProperty());
 
         requestersTable.setItems(item.getRequesters());
         assistantsTable.setItems(item.getAssistants());
@@ -120,7 +130,7 @@ public class CoverController extends EditController<Cover> {
         priceLabel.textProperty().bind(item.priceProperty().asString());
         receivedLabel.textProperty().bind(item.receivedProperty().asString());
         feeLabel.textProperty().bind(item.feeProperty().asString());
-        sendLabel.textProperty().bind(item.sentProperty().asString());
+        sentLabel.textProperty().bind(item.sentProperty().asString());
     }
 
     @FXML

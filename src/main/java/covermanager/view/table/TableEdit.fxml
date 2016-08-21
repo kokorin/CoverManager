@@ -5,7 +5,7 @@
 <?import covermanager.util.TableUtil?>
 
 <?import javafx.geometry.Insets?>
-<fx:root xmlns:fx="http://javafx.com/fxml" spacing="5" type="covermanager.view.table.TableEdit" fillWidth="true">
+<fx:root xmlns:fx="http://javafx.com/fxml" spacing="5" type="covermanager.view.table.TableEdit">
     <padding>
         <Insets left="5" right="5" top="5" bottom="5"/>
     </padding>

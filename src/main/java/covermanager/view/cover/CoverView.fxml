@@ -1,59 +1,77 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import covermanager.view.table.TableEdit?>
-<BorderPane xmlns:fx="http://www.w3.org/1999/xhtml" fx:controller="covermanager.view.cover.CoverController"
-            fx:id="root" prefWidth="640" prefHeight="480">
+<?import covermanager.view.edit.EditFooter?>
+<?import javafx.geometry.Insets?>
+<VBox fx:id="root" xmlns:fx="http://www.w3.org/1999/xhtml"
+      fx:controller="covermanager.view.cover.CoverController"
+      prefWidth="640" prefHeight="480">
+    <TabPane VBox.vgrow="ALWAYS">
+        <Tab text="Общее" closable="false">
+            <ScrollPane fitToWidth="true" fitToHeight="true">
+                <GridPane hgap="5" vgap="5">
+                    <padding>
+                        <Insets left="5" right="5" top="5" bottom="5"/>
+                    </padding>
 
-    <center>
-        <TabPane>
-            <Tab text="Общее" closable="false">
-                <VBox>
-                    <Label text="Anime"/>
-                    <TextField fx:id="animeInput"/>
-                    <Label text="Song"/>
-                    <TextField fx:id="songInput"/>
-                    <Label text="Price"/>
-                    <TextField fx:id="priceLabel" editable="false"/>
-                    <Label text="Received"/>
-                    <TextField fx:id="receivedLabel" editable="false"/>
-                    <Label text="Fee"/>
-                    <TextField fx:id="feeLabel" editable="false"/>
-                    <Label text="Send"/>
-                    <TextField fx:id="sendLabel" editable="false"/>
-                    <Label text="Published"/>
-                    <CheckBox fx:id="publishedInput"/>
-                </VBox>
-            </Tab>
-            <Tab text="Заказчики" closable="false">
-                <TableEdit fx:id="requestersTable" onAdd="#onAddRequester" onEdit="#onEditRequester" onRemove="#onRemoveRequester">
-                    <columns>
-                        <TableColumn fx:id="requesterNameColumn" text="ФИО" prefWidth="100"/>
-                        <TableColumn fx:id="requesterValueColumn" text="Сумма" prefWidth="100"/>
-                        <TableColumn fx:id="requesterReceivedColumn" text="Переведено" prefWidth="100"/>
-                        <TableColumn fx:id="requesterPaymentSystemColumn" text="Система" prefWidth="100"/>
-                        <TableColumn fx:id="requesterPaymentDateColumn" text="Дата" prefWidth="100"/>
-                    </columns>
-                </TableEdit>
-            </Tab>
-            <Tab text="Помощники" closable="false">
-                <TableEdit fx:id="assistantsTable" onAdd="#onAddAssistant" onEdit="#onEditAssistant" onRemove="#onRemoveAssistant">
-                    <columns>
-                        <TableColumn fx:id="assistantTypeColumn" text="Тип" prefWidth="100"/>
-                        <TableColumn fx:id="assistantNameColumn" text="ФИО" prefWidth="100"/>
-                        <TableColumn fx:id="assistantValueColumn" text="Сумма" prefWidth="100"/>
-                        <TableColumn fx:id="assistantSentColumn" text="Переведено" prefWidth="100"/>
-                        <TableColumn fx:id="assistantPaymentSystemColumn" text="Система" prefWidth="100"/>
-                        <TableColumn fx:id="assistantPaymentDateColumn" text="Дата" prefWidth="100"/>
-                    </columns>
-                </TableEdit>
-            </Tab>
-        </TabPane>
-    </center>
+                    <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT"/>
+                        <ColumnConstraints hgrow="ALWAYS"/>
+                    </columnConstraints>
 
-    <bottom>
-        <HBox>
-            <Button fx:id="saveButton" text="Save"/>
-            <Button fx:id="cancelButton" text="Cancel"/>
-        </HBox>
-    </bottom>
-</BorderPane>
+                    <Label text="Anime" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <TextField fx:id="animeInput" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                    <Label text="Song" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <TextField fx:id="songInput" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                    <Label text="Price" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <TextField fx:id="priceLabel" editable="false" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                    <Label text="Received" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                    <TextField fx:id="receivedLabel" editable="false" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                    <Label text="Fee" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                    <TextField fx:id="feeLabel" editable="false" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                    <Label text="Send" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                    <TextField fx:id="sentLabel" editable="false" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+                    <Label text="Published" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                    <CheckBox fx:id="publishedInput" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+                    <Label text="Comment" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                    <TextArea fx:id="commentInput" GridPane.rowIndex="7" GridPane.columnIndex="1"
+                              GridPane.fillHeight="true"/>
+                </GridPane>
+            </ScrollPane>
+        </Tab>
+        <Tab text="Заказчики" closable="false">
+            <TableEdit fx:id="requestersTable" onAdd="#onAddRequester" onEdit="#onEditRequester"
+                       onRemove="#onRemoveRequester">
+                <columns>
+                    <TableColumn fx:id="requesterNameColumn" text="ФИО" prefWidth="100"/>
+                    <TableColumn fx:id="requesterValueColumn" text="Сумма" prefWidth="100"/>
+                    <TableColumn fx:id="requesterReceivedColumn" text="Переведено" prefWidth="100"/>
+                    <TableColumn fx:id="requesterPaymentSystemColumn" text="Система" prefWidth="100"/>
+                    <TableColumn fx:id="requesterPaymentDateColumn" text="Дата" prefWidth="100"/>
+                </columns>
+            </TableEdit>
+        </Tab>
+        <Tab text="Помощники" closable="false">
+            <TableEdit fx:id="assistantsTable" onAdd="#onAddAssistant" onEdit="#onEditAssistant"
+                       onRemove="#onRemoveAssistant">
+                <columns>
+                    <TableColumn fx:id="assistantTypeColumn" text="Тип" prefWidth="100"/>
+                    <TableColumn fx:id="assistantNameColumn" text="ФИО" prefWidth="100"/>
+                    <TableColumn fx:id="assistantValueColumn" text="Сумма" prefWidth="100"/>
+                    <TableColumn fx:id="assistantSentColumn" text="Переведено" prefWidth="100"/>
+                    <TableColumn fx:id="assistantPaymentSystemColumn" text="Система" prefWidth="100"/>
+                    <TableColumn fx:id="assistantPaymentDateColumn" text="Дата" prefWidth="100"/>
+                </columns>
+            </TableEdit>
+        </Tab>
+    </TabPane>
+
+    <EditFooter onSave="#save" onCancel="#cancel"/>
+</VBox>

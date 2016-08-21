@@ -21,6 +21,8 @@ public class Cover {
     private final StringProperty song = new SimpleStringProperty();
     private final BooleanProperty published = new SimpleBooleanProperty();
     private final ObjectProperty<LocalDate> publishDate = new SimpleObjectProperty<>();
+    private final StringProperty comment = new SimpleStringProperty();
+
     private final ReadOnlyIntegerWrapper price = new ReadOnlyIntegerWrapper();
     private final ReadOnlyIntegerWrapper received = new ReadOnlyIntegerWrapper();
     private final ReadOnlyIntegerWrapper fee = new ReadOnlyIntegerWrapper();
@@ -28,8 +30,6 @@ public class Cover {
 
     private final ObservableList<Requester> requesters = FXCollections.observableArrayList();
     private final ObservableList<Assistant> assistants = FXCollections.observableArrayList();
-
-    private final StringProperty comment = new SimpleStringProperty();
 
     public static final Callback<Cover, Observable[]> EXTRACTOR = c -> new Observable[]{
             c.anime, c.song, c.published, c.publishDate, c.requesters, c.assistants
@@ -104,6 +104,18 @@ public class Cover {
         this.publishDate.set(publishDate);
     }
 
+    public String getComment() {
+        return comment.get();
+    }
+
+    public StringProperty commentProperty() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment.set(comment);
+    }
+
     public int getPrice() {
         return price.get();
     }
@@ -154,17 +166,5 @@ public class Cover {
 
     public ObservableList<Assistant> getAssistants() {
         return assistants;
-    }
-
-    public String getComment() {
-        return comment.get();
-    }
-
-    public StringProperty commentProperty() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment.set(comment);
     }
 }
